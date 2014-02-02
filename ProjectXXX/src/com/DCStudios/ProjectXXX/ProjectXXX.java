@@ -7,7 +7,7 @@ import com.badlogic.gdx.Game;
 public class ProjectXXX extends Game {
 	
 	public static final String name = "ProjectXXX";
-	public static final String version = "0.0.0.02 Pre-Alpha";
+	public static final String version = "0.0.0.03 Pre-Alpha";
 	static final public boolean debug = false;
 	
 	@Override

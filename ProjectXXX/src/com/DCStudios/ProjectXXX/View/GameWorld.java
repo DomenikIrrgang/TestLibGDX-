@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import box2dLight.RayHandler;
 
+import com.DCStudios.ProjectXXX.BackGround.BackGround;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.DCStudios.ProjectXXX.Models.Entity;
 import com.DCStudios.ProjectXXX.Models.MoveableEntity;
@@ -27,11 +28,13 @@ public abstract class GameWorld {
 	protected RayHandler rayHandler;
 	
 	protected boolean renderLight = false;
+	protected boolean renderBackGround = false;
 	
 	protected Measure measure;	
-	protected Texture backGround;
+	protected BackGround backGround;
 	
 	protected GameWorld gameWorldPointer;	
+	
 	
 	public GameWorld(GameWorld gameWorld) {
 		gameWorldPointer = gameWorld;
@@ -43,6 +46,14 @@ public abstract class GameWorld {
 	
 	public Array<Entity> getEntitys() {
 		return entitys;
+	}
+	
+	public BackGround getBackGround() {
+		return backGround;
+	}
+	
+	public boolean renderBackGround() {
+		return renderBackGround;
 	}
 	
 	protected void addEntity(Entity entity) {
@@ -73,7 +84,7 @@ public abstract class GameWorld {
 		}		
 	}
 	
-	public void render(OrthographicCamera camera) {	
+	public void renderPhysics(OrthographicCamera camera) {	
 		world.step(1/60f, 6, 2);
 		update();
 		box2DRenderer.render(world, camera.combined);

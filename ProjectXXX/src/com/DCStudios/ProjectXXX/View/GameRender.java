@@ -55,10 +55,15 @@ public class GameRender {
 		
 		updateCameraSettings();
 		
-		gameWorld.render(camera);
+		gameWorld.renderPhysics(camera);
+		
 		
 		batch.begin();
-
+		
+		if (gameWorld.renderBackGround) {
+			gameWorld.getBackGround().draw(batch);
+		}
+		
 		eIter = gameWorld.getEntitys().iterator();
 		while (eIter.hasNext()) {
 			entity = eIter.next();

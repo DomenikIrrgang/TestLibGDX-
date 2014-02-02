@@ -37,7 +37,7 @@ public class Baum extends MoveableEntity {
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 1.0f;
-		fixtureDef.restitution = 1.0f;
+		fixtureDef.restitution = 0.0f;
 		body.setFixedRotation(true);
 		
 		body.createFixture(fixtureDef); 

@@ -1,5 +1,6 @@
 package com.DCStudios.ProjectXXX.GameWorlds;
 
+import com.DCStudios.ProjectXXX.BackGround.TestBackGround;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.DCStudios.ProjectXXX.Models.Baum;
 import com.DCStudios.ProjectXXX.Models.Player;
@@ -26,6 +27,10 @@ public class TestWorld extends GameWorld {
 		addGround(-1f,0,1.0f, measure.height);
 		addGround(measure.width + 1f,0,1.0f, measure.height);
 		addGround(0,measure.height + 1f,measure.width, 1f);
+		
+		backGround = new TestBackGround();
+		
+		renderBackGround = true;
 
 	}
 	

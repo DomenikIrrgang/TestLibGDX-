@@ -69,9 +69,9 @@ public abstract class MoveableEntity extends Entity {
 		this.moving = moving;
 	}
 	
-	
+	@Override
 	public void dispose() {
-		shape.dispose();		
+		super.dispose();
 	}
 		
 	abstract public void setWorld(World world);
