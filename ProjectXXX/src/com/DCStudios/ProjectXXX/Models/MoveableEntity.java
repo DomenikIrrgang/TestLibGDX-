@@ -61,7 +61,6 @@ public abstract class MoveableEntity extends Entity {
 		body.setLinearVelocity(velocity.x * speed, velocity.y * speed);	
 		//body.applyForceToCenter(velocity.x * speed, velocity.y * speed, true);
 		
-		Gdx.app.log("PosX and Y",position.x +  " " + position.y + " " + velocity.x + " " + velocity.y );
 		super.update();
 	}
 	

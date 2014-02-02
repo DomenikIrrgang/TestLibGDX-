@@ -90,9 +90,9 @@ public abstract class GameWorld {
 		box2DRenderer.render(world, camera.combined);
 		
 		if (renderLight) {
+			rayHandler.setCombinedMatrix(camera.combined);
 			rayHandler.updateAndRender();
 		}
-		
 		
 	}
 	

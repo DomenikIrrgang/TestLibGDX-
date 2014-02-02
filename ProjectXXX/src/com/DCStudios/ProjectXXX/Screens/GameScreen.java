@@ -8,6 +8,7 @@ import com.DCStudios.ProjectXXX.View.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.FPSLogger;
 
 public class GameScreen implements Screen {
 
@@ -15,18 +16,21 @@ public class GameScreen implements Screen {
 	GameWorld gameWorld;
 	GameRender gameRender;
 	InputProcessor input;
+	FPSLogger log = new FPSLogger();
 	
 	public GameScreen(ProjectXXX game) {
 		this.game = game;
 		this.gameWorld = new TestWorld(gameWorld);
 		this.gameRender = new GameRender(gameWorld);
 		input = new InputHandler(gameWorld);
+		
 		Gdx.input.setInputProcessor(input);
 	}
 	
 	@Override
 	public void render(float delta) {
 		gameRender.render();
+		log.log();
 	}
 
 	@Override

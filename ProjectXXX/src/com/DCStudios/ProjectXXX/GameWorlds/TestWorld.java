@@ -1,10 +1,14 @@
 package com.DCStudios.ProjectXXX.GameWorlds;
 
+import box2dLight.ConeLight;
+import box2dLight.PointLight;
+
 import com.DCStudios.ProjectXXX.BackGround.TestBackGround;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.DCStudios.ProjectXXX.Models.Baum;
 import com.DCStudios.ProjectXXX.Models.Player;
 import com.DCStudios.ProjectXXX.View.GameWorld;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -31,6 +35,9 @@ public class TestWorld extends GameWorld {
 		backGround = new TestBackGround();
 		
 		renderBackGround = true;
+		new PointLight(rayHandler, 10000, Color.CYAN, 250, 40, 40);
+		new ConeLight(rayHandler, 5000, Color.RED, 200, measure.width/2 + 50, measure.height / 2 + 15, 270, 35);
+		renderLight = false;
 
 	}
 	

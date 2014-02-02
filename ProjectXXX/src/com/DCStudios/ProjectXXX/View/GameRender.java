@@ -46,6 +46,7 @@ public class GameRender {
 		batch.setProjectionMatrix(camera.combined);
 
 		shapeRenderer = new ShapeRenderer();
+		gameWorld.rayHandler.setCombinedMatrix(camera.combined);
 	}
 
 	public void render() {
@@ -54,23 +55,24 @@ public class GameRender {
 		batch.setProjectionMatrix(camera.combined);
 		
 		updateCameraSettings();
-		
 		gameWorld.renderPhysics(camera);
-		
-		
 		batch.begin();
 		
 		if (gameWorld.renderBackGround) {
 			gameWorld.getBackGround().draw(batch);
 		}
+	
+		
 		
 		eIter = gameWorld.getEntitys().iterator();
 		while (eIter.hasNext()) {
 			entity = eIter.next();
 			entity.draw(batch);
 		}
-
+		
 		batch.end();
+		gameWorld.renderPhysics(camera);
+		
 
 		if (ProjectXXX.debug) {
 			shapeRenderer.setProjectionMatrix(camera.combined);
