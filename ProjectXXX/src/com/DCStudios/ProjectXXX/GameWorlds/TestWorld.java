@@ -2,11 +2,13 @@ package com.DCStudios.ProjectXXX.GameWorlds;
 
 import box2dLight.ConeLight;
 import box2dLight.PointLight;
+import box2dLight.RayHandler;
 
 import com.DCStudios.ProjectXXX.BackGround.TestBackGround;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.DCStudios.ProjectXXX.Models.Baum;
 import com.DCStudios.ProjectXXX.Models.Player;
+import com.DCStudios.ProjectXXX.Models.TestAnimation;
 import com.DCStudios.ProjectXXX.View.GameWorld;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -26,6 +28,7 @@ public class TestWorld extends GameWorld {
 		addEntity(new Player(new Vector2(50,11), new Measure(10, 10), 0));
 		addEntity(new Player(new Vector2(70,11), new Measure(10, 10), 0));
 		addEntity(new Baum(new Vector2(90,50), new Measure(10, 10), 0));
+		addEntity(new TestAnimation(new Vector2(90,50), new Measure(10, 10), 0));
 		
 		addGround(0,-1f,measure.width, 1f);
 		addGround(-1f,0,1.0f, measure.height);

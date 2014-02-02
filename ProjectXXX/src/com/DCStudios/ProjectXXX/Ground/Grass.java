@@ -7,9 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Grass extends Ground {
 
 	public Grass(Vector2 position, Measure measure) {
-		super(position, measure);
-		texture = new Texture("data/grass.jpg");
-		setUpSprite();
+		super(position, measure, new Texture("data/grass.jpg"));
 	}
 
 }

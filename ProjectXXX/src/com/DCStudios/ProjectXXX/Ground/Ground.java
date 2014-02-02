@@ -16,9 +16,11 @@ public abstract class Ground {
 	/*
 	 * Don't forget to call setUpSprite()!
 	 */
-	public Ground(Vector2 position, Measure measure) {
+	public Ground(Vector2 position, Measure measure, Texture texture) {
 		this.position = position;
 		this.measure = measure;
+		this.texture = texture;
+		setUpSprite();
 
 	}
 

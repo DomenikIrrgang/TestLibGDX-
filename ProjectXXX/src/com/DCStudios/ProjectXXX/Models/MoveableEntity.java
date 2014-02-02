@@ -50,16 +50,13 @@ public abstract class MoveableEntity extends Entity {
 	
 	@Override
 	public void update() {
-		//position.add(velocity.cpy().scl(Gdx.graphics.getDeltaTime() * speed));
 		
 		sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
-		sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-		
+		sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);	
 		position.x = sprite.getX();
 		position.y = sprite.getY();
 				
 		body.setLinearVelocity(velocity.x * speed, velocity.y * speed);	
-		//body.applyForceToCenter(velocity.x * speed, velocity.y * speed, true);
 		
 		super.update();
 	}
@@ -73,6 +70,8 @@ public abstract class MoveableEntity extends Entity {
 		super.dispose();
 	}
 		
-	abstract public void setWorld(World world);
+	public void setWorld(World world) {
+		this.world = world;
+	}
 
 }
