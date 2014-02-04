@@ -5,23 +5,23 @@ import java.util.Iterator;
 import box2dLight.RayHandler;
 
 import com.DCStudios.ProjectXXX.BackGround.BackGround;
+import com.DCStudios.ProjectXXX.ContactListener.TriggerListener;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
+import com.DCStudios.ProjectXXX.Events.Event;
 import com.DCStudios.ProjectXXX.Models.Entity;
 import com.DCStudios.ProjectXXX.Models.MoveableEntity;
+import com.DCStudios.ProjectXXX.Screens.GameScreen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 
 public abstract class GameWorld {
 	
 	protected Array<Entity> entitys = new Array<Entity>();
 	protected MoveableEntity player;
+	protected Array<Event> events = new Array<Event>();
 	
 	protected World world;
 	protected Box2DDebugRenderer box2DRenderer;
@@ -33,15 +33,24 @@ public abstract class GameWorld {
 	protected Measure measure;	
 	protected BackGround backGround;
 	
-	protected GameWorld gameWorldPointer;	
+	protected GameScreen screen;	
 	
 	
-	public GameWorld(GameWorld gameWorld) {
-		gameWorldPointer = gameWorld;
+	public GameWorld(GameScreen screen) {
+		this.screen = screen;
 		world = new World(new Vector2(0, 0f), false);
 		box2DRenderer = new Box2DDebugRenderer();
 		rayHandler = new RayHandler(world);
+		world.setContactListener(new TriggerListener());		
 		
+	}
+	
+	public World getWorld() {
+		return world;
+	}
+		
+	public GameScreen getScreen() {
+		return screen;
 	}
 	
 	public Array<Entity> getEntitys() {
@@ -82,6 +91,11 @@ public abstract class GameWorld {
 			Entity updateEntity = eIter.next();
 			updateEntity.update();
 		}		
+		Iterator<Event> eventIter = events.iterator();
+		while (eventIter.hasNext()) {
+			Event updateEvent = eventIter.next();
+			updateEvent.update();
+		}
 	}
 	
 	public void renderPhysics(OrthographicCamera camera) {	

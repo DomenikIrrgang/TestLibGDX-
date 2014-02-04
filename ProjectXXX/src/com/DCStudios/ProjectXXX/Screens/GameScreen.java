@@ -20,10 +20,17 @@ public class GameScreen implements Screen {
 	
 	public GameScreen(ProjectXXX game) {
 		this.game = game;
-		this.gameWorld = new TestWorld(gameWorld);
+		this.gameWorld = new TestWorld(this);
 		this.gameRender = new GameRender(gameWorld);
 		input = new InputHandler(gameWorld);
 		
+		Gdx.input.setInputProcessor(input);
+	}
+	
+	public void setNewWorld(GameWorld gameWorld) {
+		this.gameWorld = gameWorld;
+		this.gameRender = new GameRender(this.gameWorld);
+		input = new InputHandler(this.gameWorld);
 		Gdx.input.setInputProcessor(input);
 	}
 	

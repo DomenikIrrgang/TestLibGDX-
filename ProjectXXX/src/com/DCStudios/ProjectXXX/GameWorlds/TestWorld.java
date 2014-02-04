@@ -2,13 +2,14 @@ package com.DCStudios.ProjectXXX.GameWorlds;
 
 import box2dLight.ConeLight;
 import box2dLight.PointLight;
-import box2dLight.RayHandler;
 
-import com.DCStudios.ProjectXXX.Animation.PlayerAnimationEast;
 import com.DCStudios.ProjectXXX.BackGround.TestBackGround;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
+import com.DCStudios.ProjectXXX.Events.LoadNewWorldEvent;
+import com.DCStudios.ProjectXXX.Events.RunOnTrigger;
 import com.DCStudios.ProjectXXX.Models.Baum;
 import com.DCStudios.ProjectXXX.Models.Player;
+import com.DCStudios.ProjectXXX.Screens.GameScreen;
 import com.DCStudios.ProjectXXX.View.GameWorld;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -18,8 +19,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class TestWorld extends GameWorld {
 
-	public TestWorld(GameWorld gameWorld) {
-		super(gameWorld);
+	public TestWorld(GameScreen screen) {
+		super(screen);
 		setPlayer(new Player(new Vector2(10,10), new Measure(10, 10), 0));
 		
 		measure = new Measure(200, 100);
@@ -35,8 +36,9 @@ public class TestWorld extends GameWorld {
 		addGround(0,measure.height + 1f,measure.width, 1f);
 		
 		backGround = new TestBackGround();
+		events.add(new LoadNewWorldEvent(this, new RunOnTrigger(this, new Vector2(150,80), new Measure(10,10)),new RunOnTrigger(this, new Vector2(40,80), new Measure(10,10))));
 		
-		renderBackGround = true;
+		renderBackGround = false;
 		new PointLight(rayHandler, 10000, Color.CYAN, 250, 40, 40);
 		new ConeLight(rayHandler, 5000, Color.RED, 200, measure.width/2 + 50, measure.height / 2 + 15, 270, 35);
 		renderLight = false;

@@ -45,7 +45,7 @@ public class Player extends MoveableEntity {
 		standingTexture.put(Direction.NORTHWEST, texture);
 		standingTexture.put(Direction.SOUTHEAST, texture);
 		standingTexture.put(Direction.SOUTHWEST, texture);
-		speed = 20;
+		speed = 200;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class Player extends MoveableEntity {
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		fixtureDef.restitution = 1.0f;
+		fixtureDef.restitution = 0.0f;
 		body.setFixedRotation(true);
 		
 		body.createFixture(fixtureDef); 
