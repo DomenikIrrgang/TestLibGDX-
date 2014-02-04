@@ -18,19 +18,15 @@ public class InputHandler implements InputProcessor {
 		switch (keycode) {
 		case Keys.W: 
 			gameWorld.getPlayer().getVelocity().y = 1;
-			gameWorld.getPlayer().setMoving(true);
 			break;
 		case Keys.S:
 			gameWorld.getPlayer().getVelocity().y = -1;
-			gameWorld.getPlayer().setMoving(true);
 			break;
 		case Keys.A:
 			gameWorld.getPlayer().getVelocity().x = -1;
-			gameWorld.getPlayer().setMoving(true);
 			break;
 		case Keys.D:
 			gameWorld.getPlayer().getVelocity().x = 1;
-			gameWorld.getPlayer().setMoving(true);
 			break;
 		}
 		return true;
@@ -42,25 +38,21 @@ public class InputHandler implements InputProcessor {
 		case Keys.W:
 			if (gameWorld.getPlayer().getVelocity().y == 1) {
 				gameWorld.getPlayer().getVelocity().y = 0;
-				gameWorld.getPlayer().setMoving(false);
 			}
 			break;
 		case Keys.S:
 			if (gameWorld.getPlayer().getVelocity().y == -1) {
 				gameWorld.getPlayer().getVelocity().y = 0;
-				gameWorld.getPlayer().setMoving(false);
 			}
 			break;
 		case Keys.A:
 			if (gameWorld.getPlayer().getVelocity().x == -1) {
 				gameWorld.getPlayer().getVelocity().x = 0;
-				gameWorld.getPlayer().setMoving(false);
 			}
 			break;
 		case Keys.D:
 			if (gameWorld.getPlayer().getVelocity().x == 1) {
 				gameWorld.getPlayer().getVelocity().x = 0;
-				gameWorld.getPlayer().setMoving(false);
 			}
 			break;
 		}

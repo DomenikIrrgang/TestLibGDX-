@@ -1,45 +1,32 @@
-package com.DCStudios.ProjectXXX.Models;
+package com.DCStudios.ProjectXXX.Animation;
 
-import java.util.HashMap;
 import java.util.Iterator;
 
-import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
 
-
-public abstract class AnimatedMoveableEntity extends MoveableEntity {
-	
+public abstract class Animation {
 	protected Array<Texture> textures;
 	protected Array<Float> textureTime;
 	protected float timeGone;
 	protected float length;
 	protected float animationSpeed;
 	
-	public AnimatedMoveableEntity(Vector2 position, Measure measure,
-			float rotation) {
-		super(position, measure, rotation);
+	public Animation() {
 		textures = new Array<Texture>();
 		textureTime = new Array<Float>();
 		timeGone = 0f;
 		length = 1f;
 		animationSpeed = 1f;
 	}
-
-	@Override
-	public void setWorld(World world) {
-		super.setWorld(world);
+	
+	public void update() {
+		timeGone += Gdx.graphics.getDeltaTime() * animationSpeed;		
 	}
 	
-	@Override
-	public void update() {
-		super.update();
-		timeGone += Gdx.graphics.getDeltaTime() * animationSpeed;
-		
-		sprite.setTexture(textures.get(getTexturePosition()));				
+	public Texture getTextureToDraw() {
+		return textures.get(getTexturePosition());
 	}
 	
 	private int getTexturePosition() {
@@ -67,4 +54,7 @@ public abstract class AnimatedMoveableEntity extends MoveableEntity {
 		textureTime.add(timeGone);
 	}
 	
+	public void reset() {
+		timeGone = 0f;
+	}
 }

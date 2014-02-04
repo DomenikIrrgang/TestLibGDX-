@@ -1,7 +1,12 @@
 package com.DCStudios.ProjectXXX.Models;
 
+import java.util.HashMap;
+
+import com.DCStudios.ProjectXXX.Animation.Animation;
+import com.DCStudios.ProjectXXX.DataStructures.Direction;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -15,13 +20,22 @@ public abstract class MoveableEntity extends Entity {
 	protected Vector2 velocity;
 	protected float rotation;
 	protected float speed;
+	protected boolean isMoving;
 		
-	protected boolean moving = false;
+	protected Direction direction, oldDirection;
+	protected HashMap<Direction,Animation> animation;
+	protected HashMap<Direction, Texture> standingTexture;
+		
 
 	public MoveableEntity(Vector2 position, Measure measure, float rotation) {
 		super(position, measure);
 		this.rotation = rotation;
 		velocity = new Vector2(0, 0);
+		animation = new HashMap<Direction, Animation>();
+		standingTexture = new HashMap<Direction, Texture>();
+		isMoving = false;
+		direction = Direction.SOUTH;
+		oldDirection = Direction.SOUTH;
 	}
 
 	public Vector2 getVelocity() {
@@ -48,21 +62,73 @@ public abstract class MoveableEntity extends Entity {
 		this.speed = speed;
 	}
 	
-	@Override
-	public void update() {
-		
-		sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
-		sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);	
-		position.x = sprite.getX();
-		position.y = sprite.getY();
-				
-		body.setLinearVelocity(velocity.x * speed, velocity.y * speed);	
-		
-		super.update();
+	private void updateDirection() {
+		oldDirection = direction;
+		if (velocity.x == 1) {
+			if (velocity.y == -1) {
+				direction = Direction.SOUTHEAST;
+			} else {
+				if (velocity.y == 1) {
+					direction = Direction.NORTHEAST;
+				} else {
+					direction = Direction.EAST;
+				}
+			}
+		} else {
+			if (velocity.x == -1) {
+				if (velocity.y == -1) {
+					direction = Direction.SOUTHWEST;
+				} else {
+					if (velocity.y == 1) {
+						direction = Direction.NORTHWEST;
+					} else {
+						direction = Direction.WEST;
+					}
+				}
+			} else {
+				if (velocity.y == 1) {
+					direction = Direction.NORTH;
+				} else {
+					if (velocity.y == -1) {
+						direction = Direction.SOUTH;
+					}
+				}
+			}
+		}
+	}
+
+	private void resetOldAnimation() {
+		if (oldDirection != direction)
+			animation.get(oldDirection).reset();
 	}
 	
-	public void setMoving(boolean moving) {
-		this.moving = moving;
+	private void updateTexture() {
+		if (isMoving) {
+			animation.get(direction).update();
+			sprite.setTexture(animation.get(direction).getTextureToDraw());
+		} else {
+			sprite.setTexture(standingTexture.get(direction));
+		}
+	}
+	
+	private void updateMoving() {
+		if (velocity.x != 0 || velocity.y != 0) {
+			isMoving = true;
+		} else {
+			isMoving = false;
+		}
+	}
+	@Override
+	public void update() {
+				
+		updateDirection();
+		resetOldAnimation();
+		updateMoving();
+		updateTexture();
+		super.update();
+				
+		body.setLinearVelocity(velocity.x * speed, velocity.y * speed);		
+		//body.applyForceToCenter(velocity.x * speed, velocity.y * speed, true);
 	}
 	
 	@Override

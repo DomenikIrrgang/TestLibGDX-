@@ -4,6 +4,7 @@ import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -66,6 +67,12 @@ public abstract class Entity {
 	}
 	
 	public void update() {
+		
+		sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
+		sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);	
+		position.x = sprite.getX();
+		position.y = sprite.getY();
+		
 		bounds.x = position.x;
 		bounds.y = position.y;
 	}

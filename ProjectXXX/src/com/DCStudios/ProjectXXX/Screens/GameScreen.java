@@ -31,7 +31,6 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		gameRender.render();
 		//Gdx.app.log("delta.", String.valueOf(delta));
-		//log.log();
 	}
 
 	@Override

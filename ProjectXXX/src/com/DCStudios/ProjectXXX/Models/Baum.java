@@ -11,13 +11,12 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class Baum extends MoveableEntity {
+public class Baum extends Entity {
 	
-	public Baum(Vector2 position, Measure measure, float rotation) {
-		super(position, measure, rotation);
+	public Baum(Vector2 position, Measure measure) {
+		super(position, measure);
 		texture = new Texture("data/baum.png");
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		speed = 0;
 	}
 	
 	@Override
