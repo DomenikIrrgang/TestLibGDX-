@@ -9,10 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 public class LoadNewWorldEvent extends Event {
 
 	public LoadNewWorldEvent(GameWorld gameWorld, Trigger ... trigger) {
-		super(gameWorld);
-		for (Trigger t : trigger) {
-			addTrigger(t);
-		}				
+		super(gameWorld, trigger);				
 	}
 
 	@Override

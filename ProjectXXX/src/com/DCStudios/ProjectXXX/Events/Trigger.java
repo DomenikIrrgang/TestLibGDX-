@@ -2,14 +2,14 @@ package com.DCStudios.ProjectXXX.Events;
 
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.DCStudios.ProjectXXX.View.GameWorld;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public abstract class Trigger {
 	
@@ -49,9 +49,12 @@ public abstract class Trigger {
 		fixtureDef.friction = 0.0f;
 		fixtureDef.restitution = 0.0f;
 		fixtureDef.isSensor = true;
+		
+		
 		body.setFixedRotation(true);
 		
-		body.createFixture(fixtureDef); 
+		body.createFixture(fixtureDef);
+		
 		
 		body.setUserData(this);		
 	}

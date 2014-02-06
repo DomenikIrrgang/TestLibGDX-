@@ -55,13 +55,15 @@ public class GameRender {
 		
 		updateCameraSettings();
 		batch.setProjectionMatrix(camera.combined);
-		gameWorld.renderPhysics(camera);
+		
 		batch.begin();
 		
 		if (gameWorld.renderBackGround) {
 			gameWorld.getBackGround().draw(batch);
 		}
-	
+		batch.end();
+		gameWorld.renderPhysics(camera);
+		batch.begin();
 		
 		
 		eIter = gameWorld.getEntitys().iterator();

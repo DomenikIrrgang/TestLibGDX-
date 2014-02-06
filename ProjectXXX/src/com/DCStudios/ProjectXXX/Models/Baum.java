@@ -38,7 +38,7 @@ public class Baum extends Entity {
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.0f;
 		body.setFixedRotation(true);
-		
+				
 		body.createFixture(fixtureDef); 
 		
 		sprite = new Sprite(texture);

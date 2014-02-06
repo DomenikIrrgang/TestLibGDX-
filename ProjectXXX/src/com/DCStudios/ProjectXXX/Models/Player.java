@@ -45,7 +45,7 @@ public class Player extends MoveableEntity {
 		standingTexture.put(Direction.NORTHWEST, texture);
 		standingTexture.put(Direction.SOUTHEAST, texture);
 		standingTexture.put(Direction.SOUTHWEST, texture);
-		speed = 200;
+		speed = 40;
 	}
 
 	@Override
@@ -66,6 +66,7 @@ public class Player extends MoveableEntity {
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
 		fixtureDef.restitution = 0.0f;
+		fixtureDef.filter.categoryBits = 10;
 		body.setFixedRotation(true);
 		
 		body.createFixture(fixtureDef); 
@@ -75,6 +76,10 @@ public class Player extends MoveableEntity {
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		//sprite.setPosition(position.x, position.y);
 		body.setUserData(this);				
+	}
+	
+	public void swingWeapon() {
+		
 	}
 	
 	

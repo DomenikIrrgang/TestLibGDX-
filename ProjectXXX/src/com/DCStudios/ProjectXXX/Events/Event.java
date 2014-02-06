@@ -14,10 +14,13 @@ public abstract class Event {
 	private Iterator<Trigger> tIter;
 	protected int triggerCount;
 
-	public Event(GameWorld gameWorld) {
+	public Event(GameWorld gameWorld, Trigger ... trigger) {
 		this.gameWorld = gameWorld;
-		trigger = new Array<Trigger>();
+		this.trigger = new Array<Trigger>();
 		triggerCount = 0;
+		for (Trigger t : trigger) {
+			addTrigger(t);
+		}	
 	}
 
 	protected boolean isTriggered() {
@@ -29,7 +32,7 @@ public abstract class Event {
 				triggerCounter++;
 			}
 		}
-		
+
 		if (triggerCounter >= triggerCount) {
 			return true;
 		}

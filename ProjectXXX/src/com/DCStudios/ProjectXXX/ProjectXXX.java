@@ -1,13 +1,14 @@
 package com.DCStudios.ProjectXXX;
 
 import com.DCStudios.ProjectXXX.Screens.GameScreen;
+import com.DCStudios.ProjectXXX.Screens.SplashScreenLogo;
 import com.badlogic.gdx.Game;
 
 
 public class ProjectXXX extends Game {
 	
 	public static final String name = "ProjectXXX";
-	public static final String version = "0.0.0.04 Pre-Alpha";
+	public static final String version = "0.0.0.06 Pre-Alpha";
 	static final public boolean debug = false;
 	
 	@Override
