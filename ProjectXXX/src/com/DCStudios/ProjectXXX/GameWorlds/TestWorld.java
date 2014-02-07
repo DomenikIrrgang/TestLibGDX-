@@ -52,7 +52,7 @@ public class TestWorld extends GameWorld {
 		Light.setContactFilter((short) 10, (short) 10, (short) 10);
 		new ConeLight(rayHandler, 200, Color.RED, 200, measure.width / 2 + 50,
 				measure.height / 2 + 15, 270, 35);
-		renderLight = true;
+		renderLight = false;
 
 	}
 

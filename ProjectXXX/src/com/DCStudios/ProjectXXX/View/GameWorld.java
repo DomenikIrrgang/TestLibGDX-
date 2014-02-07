@@ -5,7 +5,7 @@ import java.util.Iterator;
 import box2dLight.RayHandler;
 
 import com.DCStudios.ProjectXXX.BackGround.BackGround;
-import com.DCStudios.ProjectXXX.ContactListener.TriggerListener;
+import com.DCStudios.ProjectXXX.ContactListener.CollisionListener;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.DCStudios.ProjectXXX.Events.Event;
 import com.DCStudios.ProjectXXX.Models.Entity;
@@ -41,7 +41,7 @@ public abstract class GameWorld {
 		world = new World(new Vector2(0, 0f), false);
 		box2DRenderer = new Box2DDebugRenderer();
 		rayHandler = new RayHandler(world);
-		world.setContactListener(new TriggerListener());		
+		world.setContactListener(new CollisionListener());		
 		
 	}
 	

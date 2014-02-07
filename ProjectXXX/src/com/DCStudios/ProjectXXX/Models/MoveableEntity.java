@@ -3,6 +3,7 @@ package com.DCStudios.ProjectXXX.Models;
 import java.util.HashMap;
 
 import com.DCStudios.ProjectXXX.Animation.Animation;
+import com.DCStudios.ProjectXXX.AnimationSet.AnimationSet;
 import com.DCStudios.ProjectXXX.DataStructures.Direction;
 import com.DCStudios.ProjectXXX.DataStructures.Measure;
 import com.badlogic.gdx.Gdx;
@@ -21,18 +22,16 @@ public abstract class MoveableEntity extends Entity {
 	protected float rotation;
 	protected float speed;
 	protected boolean isMoving;
+	
+	protected AnimationSet animation;
 		
 	protected Direction direction, oldDirection;
-	protected HashMap<Direction,Animation> animation;
-	protected HashMap<Direction, Texture> standingTexture;
-		
 
 	public MoveableEntity(Vector2 position, Measure measure, float rotation) {
 		super(position, measure);
 		this.rotation = rotation;
 		velocity = new Vector2(0, 0);
-		animation = new HashMap<Direction, Animation>();
-		standingTexture = new HashMap<Direction, Texture>();
+		setUpAnimationSet();
 		isMoving = false;
 		direction = Direction.SOUTH;
 		oldDirection = Direction.SOUTH;
@@ -61,6 +60,10 @@ public abstract class MoveableEntity extends Entity {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
+	
+	abstract protected void setUpAnimationSet();
+	
+	abstract protected void setUpBody();
 	
 	private void updateDirection() {
 		oldDirection = direction;
@@ -97,17 +100,13 @@ public abstract class MoveableEntity extends Entity {
 		}
 	}
 
-	private void resetOldAnimation() {
-		if (oldDirection != direction)
-			animation.get(oldDirection).reset();
-	}
-	
+
 	private void updateTexture() {
 		if (isMoving) {
-			animation.get(direction).update();
-			sprite.setTexture(animation.get(direction).getTextureToDraw());
+			animation.updateAnimation(direction);
+			sprite.setTexture(animation.getAnimation(direction));
 		} else {
-			sprite.setTexture(standingTexture.get(direction));
+			sprite.setTexture(animation.getStandingTexture(direction));
 		}
 	}
 	
@@ -118,11 +117,11 @@ public abstract class MoveableEntity extends Entity {
 			isMoving = false;
 		}
 	}
+	
 	@Override
 	public void update() {
 				
 		updateDirection();
-		resetOldAnimation();
 		updateMoving();
 		updateTexture();
 		super.update();
@@ -138,6 +137,7 @@ public abstract class MoveableEntity extends Entity {
 		
 	public void setWorld(World world) {
 		this.world = world;
+		setUpBody();
 	}
 
 }
